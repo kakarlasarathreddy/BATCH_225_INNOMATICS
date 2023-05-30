@@ -470,3 +470,147 @@ class Leetcode:
         print(c, d)
 
         return list(c.intersection(d))
+
+
+
+
+def lc_1768(self,a,b):
+        
+        '''
+        You are given two strings word1 and word2. Merge the strings by adding letters in alternating order,starting with word1.
+        If a string is longer than the other, append the additional letters onto the end of the merged string.
+        Return the merged string.
+        Example
+        Input: word1 = "abc", word2 = "pqr"
+        Output: "apbqcr"
+        Explanation: The merged string will be merged as so:
+        word1:  a   b   c
+        word2:    p   q   r
+        merged: a p b q c r
+        '''
+        
+        i = 0
+        j = 0
+        result =''
+        while i< len(a) and j<len(b):
+            result +=a[i]+b[j]
+            i+=1
+            j+=1
+        while i< len(a):
+            result +=a[i]
+            i += 1
+        while j< len(b):
+            result +=b[j]
+            j += 1
+
+        return result
+    
+
+    @staticmethod
+    def counter_increment(a):
+        a+=1
+        return a
+    @staticmethod
+    def counter_reset(b):
+        return b
+    @staticmethod
+    def counter_decrement(c):
+        c-=1
+        return c  
+    def lc_2665(self,init,calls):
+        
+        '''
+        Write a function createCounter. It should accept an initial integer init. It should return an object 
+        with three functions.
+        The three functions are:
+        increment() increases the current value by 1 and then returns it.
+        decrement() reduces the current value by 1 and then returns it.
+        reset() sets the current value to init and then returns it.
+        
+        Example
+        Input: init = 5, calls = ["increment","reset","decrement"]
+        Output: [6,5,4]
+        Explanation:
+        const counter = createCounter(5);
+        counter.increment(); // 6
+        counter.reset(); // 5
+        counter.decrement(); // 4
+        '''
+        
+        z=[]
+        for x in range(len(calls)):
+            if calls[x]=="increment":
+                z.append(counter_increment(init))
+            if calls[x]=="reset":
+                z.append(counter_reset(init))
+            if calls[x]=="decrement":
+                z.append(counter_decrement(init))  #z=[inc(),re(),de()]=[6,5 , 4]      
+        return z
+    
+    def lc_1431(self,candies, extraCandies):
+        
+        '''
+        There are n kids with candies. You are given an integer array candies, where each candies[i] represents 
+        the number of candies the ith kid has, and an integer extraCandies, denoting the number of extra candies that you have.
+        Return a boolean array result of length n, where result[i] is true if, after giving the ith kid all the extraCandies,
+        they will have the greatest number of candies among all the kids, or false otherwise.
+        Note that multiple kids can have the greatest number of candies.
+
+        Example 1:
+        Input: candies = [2,3,5,1,3], extraCandies = 3
+        Output: [true,true,true,false,true] 
+        Explanation: If you give all extraCandies to:
+        - Kid 1, they will have 2 + 3 = 5 candies, which is the greatest among the kids.
+        - Kid 2, they will have 3 + 3 = 6 candies, which is the greatest among the kids.
+        - Kid 3, they will have 5 + 3 = 8 candies, which is the greatest among the kids.
+        - Kid 4, they will have 1 + 3 = 4 candies, which is not the greatest among the kids.
+        - Kid 5, they will have 3 + 3 = 6 candies, which is the greatest among the kids.
+        '''
+    
+        max_candies = max(candies)
+
+        result = []
+
+        for i in range(len(candies)):
+
+            if candies[i] + extraCandies >= max_candies:
+
+                result.append(True)
+            else:
+                result.append(False)
+
+        return result
+    
+    
+    def lc_1662(self, a, b):
+        
+        '''
+        Check If Two String Arrays are Equivalent
+        Given two string arrays word1 and word2, return true if the two arrays represent the same string, and false otherwise.
+        
+        A string is represented by an array if the array elements concatenated in order forms the string.
+        
+        Example 1:
+        
+        Input: word1 = ["ab", "c"], word2 = ["a", "bc"]
+        Output: true
+        Explanation:
+        word1 represents string "ab" + "c" -> "abc"
+        word2 represents string "a" + "bc" -> "abc"
+        The strings are the same, so return true.
+        '''
+        
+
+        w1="".join(a)   #join():word1=['abc','d','defg']  --> ''.join(t)= 'abc'
+        w2="".join(b)
+        if  w1.islower()==True and w2.islower()==True:
+            if w1==w2:
+                return True
+            else:
+                return False
+        else: 
+            print("Error: word1 [i] and word2[i] should contain lowercase letters.")
+
+            
+    
+
