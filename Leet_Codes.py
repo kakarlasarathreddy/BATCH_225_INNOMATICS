@@ -236,3 +236,101 @@ class Leetcode:
             groups = [s[i:i+k] for i in range(0, len(s), k)]
             s = ''.join(str(self.fun(group)) for group in groups)
         return s
+
+
+
+def lc_1119(self,x,y):
+    
+        '''
+        Given a string S, remove the vowels 'a', 'e', 'i', 'o', and 'u' from it, and return the new string.
+        
+        EXAMPLE:
+        Input: “leetcodeisacommunityforcoders”
+        Output: “ltcdscmmntyfrcdrs”
+        '''
+
+        return ''.join(str(a) for a in x.lower() if a not in y)
+    
+    def lc_2469(self,Celsius):
+    
+        '''
+        You are given a non-negative floating point number rounded to two decimal places celsius, 
+        that denotes the temperature in Celsius.
+        You should convert Celsius into Kelvin and Fahrenheit and return it as an array ans = [kelvin, fahrenheit].
+        Return the array ans. Answers within 10-5 of the actual answer will be accepted.
+        Note that:
+        Kelvin = Celsius + 273.15
+        Fahrenheit = Celsius * 1.80 + 32.00
+ 
+        EXAMPLE:
+        Input: celsius = 36.50
+        Output: [309.65000,97.70000]
+        Explanation: Temperature at 36.50 Celsius converted in Kelvin is 309.65 and converted in Fahrenheit is 97.70.
+        '''
+
+        Kelvin = Celsius + 273.15
+        Fahrenheit = Celsius * 1.80 + 32.00
+        return f'kelvin temp is {Kelvin} and Fahrenheit is {Fahrenheit}'
+    
+    
+    def lc_2635(self,y):
+    
+        '''
+        Given an integer array arr and a mapping function fn, return a new array with a transformation applied to each element.
+        The returned array should be created such that returnedArray[i] = fn(arr[i], i).
+        Please solve it without the built-in Array.map method.
+        
+        EXAMPLE:
+        Input: arr = [1,2,3], fn = function plusone(n) { return n + 1; }
+        Output: [2,3,4]
+        Explanation:
+        const newArray = map(arr, plusone); // [2,3,4]
+        The function increases each value in the array by one.
+        '''
+        x = [i+1 for i in y]
+        print(x)
+        
+    def lc_1480(self,nums,a=0):
+    
+        '''
+        Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
+        Return the running sum of nums
+        
+        EXAMPLE:
+        Input: nums = [1,2,3,4]
+        Output: [1,3,6,10]
+        Explanation: Running sum is obtained as follows: [1, 1+2, 1+2+3, 1+2+3+4]
+        '''
+
+        res=[]
+        for i in nums:
+            a+=i
+            res.append(a)
+        return res
+    
+    def lc_1365(self,nmb):
+    
+        '''
+        Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it. 
+        That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
+        Return the answer in an array.
+        
+        EXAMPLE:
+        Input: nums = [8,1,2,2,3]
+        Output: [4,0,1,1,3]
+        Explanation: 
+        For nums[0]=8 there exist four smaller numbers than it (1, 2, 2 and 3). 
+        For nums[1]=1 does not exist any smaller number than it.
+        For nums[2]=2 there exist one smaller number than it (1). 
+        For nums[3]=2 there exist one smaller number than it (1). 
+        For nums[4]=3 there exist three smaller numbers than it (1, 2 and 2).
+        '''
+
+        x = []
+        for i in nmb:
+            y = 0
+            for j in nmb:
+                if j<i:
+                    y += 1
+            x.append(y)
+        return x
