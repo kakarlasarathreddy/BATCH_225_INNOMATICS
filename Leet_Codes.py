@@ -453,3 +453,20 @@ class Leetcode:
             z = x.index(y)
             return x[:z + 1][::-1] + x[z + 1:]
         return x
+
+    def lc_2427(self, a, b):
+
+        '''
+        Given two positive integers a and b, return the number of common factors of a
+        and b.An integer x is a common factor of a and b if x divides both a and b.
+
+        Input: a = 12, b = 6
+        Output: 4
+        Explanation: The common factors of 12 and 6 are 1, 2, 3, 6.
+        '''
+
+        c = {i for i in range(1, a + 1) if a % i == 0}
+        d = {j for j in range(1, b + 1) if b % j == 0}
+        print(c, d)
+
+        return list(c.intersection(d))
