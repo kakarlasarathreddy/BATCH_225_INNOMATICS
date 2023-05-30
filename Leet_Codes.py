@@ -334,3 +334,122 @@ class Leetcode:
                     y += 1
             x.append(y)
         return x
+
+    def lc_2037(self, seats, students):
+
+        '''
+        There are n seats and n students in a room. You are given an array seats of length n,
+        where seats[i] is the position of the ith seat. You are also given the array students
+        of length n,where students[j] is the position of the jth student.
+
+        You may perform the following move any number of times:
+
+        Increase or decrease the position of the ith student by 1 (i.e., moving the ith student
+        from position x to x + 1 or x - 1)
+        Return the minimum number of moves required to move each student to a seat such that no
+        two students are in the same seat.
+
+        Note that there may be multiple seats or students in the same position at the beginning.
+
+        Input: seats = [3,1,5], students = [2,7,4]
+        Output: 4
+        Explanation: The students are moved as follows:
+        - The first student is moved from from position 2 to position 1 using 1 move.
+        - The second student is moved from from position 7 to position 5 using 2 moves.
+        - The third student is moved from from position 4 to position 3 using 1 move.
+        In total, 1 + 2 + 1 = 4 moves were used
+        '''
+
+        seats.sort()
+        students.sort()
+
+        result = 0
+
+        for i in range(len(seats)):
+            result += abs(seats[i] - students[i])
+
+        return result
+
+    def lc_1290(self, head):
+
+        '''
+
+        Given head which is a reference node to a singly-linked list.
+        The value of each node in the linked list is either 0 or 1.
+        The linked list holds the binary representation of a number.
+
+        Return the decimal value of the number in the linked list.
+
+        The most significant bit is at the head of the linked list.
+
+
+        Input: head = [1,0,1]
+        Output: 5
+        Explanation: (101) in base 2 = (5) in base 10
+        '''
+
+        x = ''.join([str(a) for a in head])
+        y = int(x, 2)
+        return y
+
+    def lc_2455(self, x):
+
+        '''
+        Given an integer array nums of positive integers, return the average value
+        of all even integers that are divisible by 3.
+
+        Note that the average of n elements is the sum of the n elements divided by
+        n and rounded down to the nearest integer.
+
+        Input: nums = [1,3,6,10,12,15]
+        Output: 9
+        Explanation: 6 and 12 are even numbers that are divisible by 3. (6 + 12) / 2 = 9.
+        '''
+
+        y = [i for i in x if i % 2 == 0 and i % 3 == 0]
+
+        z = sum(y) / len(y)
+        print(z)
+
+    def lc_2540(self, n1, n2):
+
+        '''
+        Given two integer arrays nums1 and nums2, sorted in non-decreasing order,
+        return the minimum integer common to both arrays. If there is no common
+        integer amongst nums1 and nums2, return -1.
+
+        Note that an integer is said to be common to nums1 and nums2 if both arrays
+        have at least one occurrence of that integer.
+
+
+        Input: nums1 = [1,2,3], nums2 = [2,4]
+        Output: 2
+        Explanation: The smallest element common to both arrays is 2, so we return 2.
+        '''
+
+        for i in n1:
+            if i in n2:
+                return i
+        return -1
+
+    def lc_2000(self, x, y):
+
+        '''
+        Given a 0-indexed string word and a character ch, reverse the segment of word
+        that starts at index 0 and ends at the index of the first occurrence of ch (inclus
+        ive).If the character ch does not exist in word, do nothing.
+
+        For example, if word = "abcdefd" and ch = "d", then you should reverse the segment
+        that starts at 0 and ends at 3 (inclusive). The resulting string will be "dcbaefd".
+        Return the resulting string.
+
+        Input: word = "abcdefd", ch = "d"
+        Output: "dcbaefd"
+        Explanation: The first occurrence of "d" is at index 3.
+        Reverse the part of word from 0 to 3 (inclusive), the resulting string is "dcbaefd".
+        '''
+
+        if y in x:
+            z = x.index(y)
+            return x[:z + 1][::-1] + x[z + 1:]
+        return x
