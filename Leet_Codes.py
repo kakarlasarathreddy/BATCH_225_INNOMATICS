@@ -897,6 +897,7 @@ class Leetcode:
                 count += 1
 
         return count
+
             
     def lc_2520 (self,n):
         
@@ -1019,8 +1020,209 @@ class Leetcode:
 
 
 
+        ##Ruthvi Gurram
+
+    # 1456. Maximum Number of Vowels in a Substring of Given Length
+    def lc_1456(self, s: str, k: int):
+            """
+            Given a string s and an integer k, return the maximum number of vowel letters in any substring of s with length k.
+            Vowel letters in English are 'a', 'e', 'i', 'o', and 'u'.
+            Example 1:
+            Input: s = "abciiidef", k = 3
+            Output: 3
+            Explanation: The substring "iii" contains 3 vowel letters.
+            ------------------------> Ruthvi Gurram
+            """
+
+            vowels = set('aeiou')
+            max_count = 0
+            current_count = 0
+            for i in range(k):
+                if s[i] in vowels:
+                    current_count += 1
+            max_count = current_count
+
+            for i in range(k, len(s)):
+
+
+                if s[i - k] in vowels:
+                    current_count -= 1
+                if s[i] in vowels:
+                    current_count += 1
+                max_count = max(max_count, current_count)
+
+            return max_count
+
+        # 2103. Rings and Rods
+        def lc_2103(self, rnr: str):
+            """
+            There are n rings and each ring is either red, green, or blue. The rings are distributed across ten rods labeled from 0 to 9.
+            You are given a string rings of length 2n that describes the n rings that are placed onto the rods. Every two characters in rings forms a color-position pair that is used to describe each ring where:
+            The first character of the ith pair denotes the ith ring's color ('R', 'G', 'B').
+            The second character of the ith pair denotes the rod that the ith ring is placed on ('0' to '9').
+            For example, "R3G2B1" describes n == 3 rings: a red ring placed onto the rod labeled 3, a green ring placed onto the rod labeled 2, and a blue ring placed onto the rod labeled 1.
+
+            Return the number of rods that have all three colors of rings on them.
+
+            Example 1:
+
+
+            Input: rings = "B0B6G0R6R0R6G9"
+            Output: 1
+            Explanation:
+            - The rod labeled 0 holds 3 rings with all colors: red, green, and blue.
+            - The rod labeled 6 holds 3 rings, but it only has red and blue.
+            - The rod labeled 9 holds only a green ring.
+            Thus, the number of rods with all three colors is 1.
+            ------------------------>  Ruthvi Gurram
+            """
+            n = len(rnr) // 2
+            rod_colors = {i: {'R': 0, 'G': 0, 'B': 0} for i in range(10)}
+            for i in range(n):
+                color = rnr[2 * i]
+                rod = int(rnr[2 * i + 1])
+                rod_colors[rod][color] += 1
+            count = 0
+            for i in range(10):
+                if all(rod_colors[i][color] > 0 for color in ['R', 'G', 'B']):
+                    count += 1
+            return count
+
+        # 1920.Build Array from Permutation
+        def lc_1920(self, nums: list):
+            """
+            Given a zero-based permutation nums (0-indexed), build an array ans of the same length where ans[i] = nums[nums[i]] for each 0 <= i < nums.length and return it.
+
+            A zero-based permutation nums is an array of distinct integers from 0 to nums.length - 1 (inclusive).
+            Example 1:
+
+            Input: nums = [0,2,1,5,3,4]
+            Output: [0,1,2,4,5,3]
+            Explanation: The array ans is built as follows:
+            ans = [nums[nums[0]], nums[nums[1]], nums[nums[2]], nums[nums[3]], nums[nums[4]], nums[nums[5]]]
+            = [nums[0], nums[2], nums[1], nums[5], nums[3], nums[4]]
+            = [0,1,2,4,5,3]
+             ---------------------> Ruthvi Gurram
+            """
+            n = len(nums)
+            arr_lst = [0] * n
+            for i in range(n):
+                arr_lst[i] = nums[nums[i]]
+            return arr_lst
+
+        # 2496. Maximum Value of a String in an Array
+        def lc_2496(self, strn):
+
+            """
+            The value of an alphanumeric string can be defined as:
+
+            The numeric representation of the string in base 10, if it comprises of digits only.
+            The length of the string, otherwise.
+            Given an array strs of alphanumeric strings, return the maximum value of any string in strs.
+
+            Example 1:
+
+             Input: strs = ["alic3","bob","3","4","00000"]
+             Output: 5
+             Explanation:
+             - "alic3" consists of both letters and digits, so its value is its length, i.e. 5.
+             - "bob" consists only of letters, so its value is also its length, i.e. 3.
+             - "3" consists only of digits, so its value is its numeric equivalent,  .e. 3.
+             "4" also consists only of digits, so its value is 4.
+              - "00000" consists only of digits, so its value is 0.
+             Hence, the maximum value is 5, of "alic3".
+             ---------------------> Ruthvi Gurram
+            """
+
+            strs = list(strn)
+            values = []
+            for s in strs:
+
+                if s.isdigit():
+                    values.append(int(s))
+
+                else:
+                    values.append(len(s))
+            return max(values)
+
+        # 1844. Replace All Digits with Characters
+        def lc_1844(self, s):
+
+            """
+            You are given a 0-indexed string s that has lowercase English letters in its even indices and digits in its odd indices.
+
+           There is a function shift(c, x), where c is a character and x is a digit, that returns the xth character after c.
+
+           For example, shift('a', 5) = 'f' and shift('x', 0) = 'x'.
+    For every odd index i, you want to replace the digit s[i] with shift(s[i-1], s[i]).
+
+    Return s after replacing all digits. It is guaranteed that shift(s[i-1], s[i]) will never exceed 'z'.
+
+    Example 1:
+
+    Input: s = "a1c1e1"
+    Output: "abcdef"
+    Explanation: The digits are replaced as follows:
+    - s[1] -> shift('a',1) = 'b'
+    - s[3] -> shift('c',1) = 'd'
+    - s[5] -> shift('e',1) = 'f'
+    ----------------------------->  Ruthvi Gurram
+
+            """
+
+            def shift(c: str, x: int) -> str:
+                return chr(ord(c) + x)
+
+            s = list(s)
+            n = len(s)
+            for i in range(1, n, 2):
+                s[i] = shift(s[i - 1], int(s[i]))
+            return ''.join(s)
+
+        # 2000. Reverse Prefix of Word
+        def lc_2000(self, word, ch):
+
+            """
+        Given a 0-indexed string word and a character ch, reverse the segment of word that starts at index 0 and ends at the index of the first occurrence of ch (inclusive). If the character ch does not exist in word, do nothing.
+
+    For example, if word = "abcdefd" and ch = "d", then you should reverse the segment that starts at 0 and ends at 3 (inclusive). The resulting string will be "dcbaefd".
+    Return the resulting string.
+
+    Example 1:
+
+    Input: word = "abcdefd", ch = "d"
+    Output: "dcbaefd"
+    Explanation: The first occurrence of "d" is at index 3.
+    Reverse the part of word from 0 to 3 (inclusive), the resulting string is "dcbaefd".
+    ---------------------------------> Ruthvi Gurram
+           """
+
+        if ch not in word:
+            return word
+
+        ch_index = word.index(ch)
+        segment = word[:ch_index + 1]
+        reversed_segment = segment[::-1]
+        rest_of_word = word[ch_index + 1:]
+
+        return reversed_segment + rest_of_word
+
+    # 2651 Calculate Delayed Arrival Time for a train
+    def lc_2651(self, arrivalTime: int, delayedTime: int) -> str:
+
+        """
+        You are given a positive integer arrivalTime denoting the arrival time of a train in hours, and another positive integer delayedTime denoting the amount of delay in hours.
+
+         Return the time when the train will arrive at the station.
+
+        Note that the time in this problem is in 24-hours format.
+
+
+
+
         Example 1:
 
+        main
         Input: nums = [0,1,2,3,4], index = [0,1,2,2,1]
         Output: [0,4,1,3,2]
         Explanation:
@@ -1036,4 +1238,96 @@ class Leetcode:
         for i in range(len(nums)):
             target.insert(index[i], nums[i])
         return target
+
+        Input: arrivalTime = 15, delayedTime = 5
+        Output: 20
+        Explanation: Arrival time of the train was 15:00 hours. It is delayed by 5 hours. Now it will reach at 15+5 = 20 (20:00 hours).
+        -------------------------------- > Ruthvi Gurram
+
+        """
+
+        # convert arrival time and delay time to minutes
+        arrival_minutes = arrivalTime // 100 * 60 + arrivalTime % 100
+        delay_minutes = delayedTime * 60
+
+        # calculate the new arrival time in minutes
+        new_arrival_minutes = (arrival_minutes + delay_minutes) % (24 * 60)
+
+        # convert the new arrival time to hours and minutes
+        new_arrival_hours = new_arrival_minutes // 60
+        new_arrival_minutes = new_arrival_minutes % 60
+        return '{:02d}:{:02d}'.format(new_arrival_hours, new_arrival_minutes)
+
+    # 1684 Count the Number of Consistent Strings
+    def lc_1684(self, allowed, words):
+
+        """
+    You are given a string allowed consisting of distinct characters and an array of strings words. A string is consistent if all characters in the string appear in the string allowed.
+
+    Return the number of consistent strings in the array words.
+
+
+
+    Example 1:
+
+    Input: allowed = "ab", words = ["ad","bd","aaab","baa","badab"]
+    Output: 2
+    Explanation: Strings "aaab" and "baa" are consistent since they only contain characters 'a' and 'b'.
+
+    ----------------------> Ruthvi Gurram
+        """
+        allowedchars = set(allowed)
+        consistentcount = 0
+
+        for ele in words:
+
+            if all(char in allowedchars for char in ele):
+                consistentcount += 1
+        return consistentcount
+
+    # 557. Reverse Words in a String III
+    def Lc_557(self, s):
+
+        """
+    Given a string s, reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order.
+
+
+
+    Example 1:
+
+    Input: s = "Let's take LeetCode contest"
+     Output: "s'teL ekat edoCteeL tsetnoc"
+        """
+        words = s.split(" ")
+        reversed_words = []
+        for ele in words:
+            reversed_words.append(ele[::-1])
+        return " ".join(reversed_words)
+
+    def Lc_2634(self, arr, fn):
+
+        """
+    Given an integer array arr and a filtering function fn, return a new array with a fewer or equal number of elements.
+    The returned array should only contain elements where fn(arr[i], i) evaluated to a truthy value.
+    Please solve it without the built-in Array.filter method.
+
+    -------------> Ruthvi Gurram
+        """
+
+        filtered_array = []
+        for i in range(len(arr)):
+
+            if fn(arr[i], i):
+                filtered_array.append(arr[i])
+            return filtered_array
+
+    def is_even(num, index):
+        return num % 2 == 0
+
+
+  if __name__ == "__main__":
+    my_leet = Leetcode()
+    arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    fn = Leetcode.is_even
+
 
