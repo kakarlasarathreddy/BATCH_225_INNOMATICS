@@ -898,5 +898,142 @@ class Leetcode:
 
         return count
             
+    def lc_2520 (self,n):
+        
+        '''
+        Given an integer num, return the number of digits in num that divide num.
+
+        An integer val divides nums if nums % val == 0.
+
+        Example 1:
+        Input: num = 7
+        Output: 1
+        Explanation: 7 divides itself, hence the answer is 1.
+        '''
+        
+        temp = n
+        count = 0
+        while temp != 0:
+
+
+            d = temp % 10
+            temp //= 10
+
+
+            if d > 0 and n % d == 0:
+                count += 1
+        return count
     
+    
+   
+    def lc_1252(self,arr):
+        
+        '''
+        There is an m x n matrix that is initialized to all 0's. There is also a 2D array indices 
+        where each indices[i] = [ri, ci] represents a 0-indexed location to perform some increment operations on the matrix.
+        For each location indices[i], do both of the following:
+        Increment all the cells on row ri.
+        Increment all the cells on column ci.
+        Given m, n, and indices, return the number of odd-valued cells in the matrix after applying
+        the increment to all locations in indices.
+
+        Example 1:
+        Input: m = 2, n = 3, indices = [[0,1],[1,1]]
+        Output: 6
+        Explanation: Initial matrix = [[0,0,0],[0,0,0]].
+        After applying first increment it becomes [[1,2,1],[0,1,0]].
+        The final matrix is [[1,3,1],[1,3,1]], which contains 6 odd numbers.
+        '''
+        
+        col = 4
+        row = 3
+
+
+        sum = [0 for i in range(col)]
+
+        for i in range(col):
+
+
+            for j in range(row):
+                sum[i] += arr[j][i]
+
+
+        count = 0
+
+        for i in range(col):
+
+            if (sum[i] % 2 == 1):
+                count += 1
+
+        return count
+    
+    
+    def lc_1281(self,n):
+        
+        '''
+        Given an integer number n, return the difference between the product of its digits and the sum of its digits.
+ 
+        Example 1:
+        Input: n = 234
+        Output: 15 
+        Explanation: 
+        Product of digits = 2 * 3 * 4 = 24 
+        Sum of digits = 2 + 3 + 4 = 9 
+        Result = 24 - 9 = 15
+        '''
+        
+        temp = n
+        sum = 0
+        product = 1
+        while(temp != 0):
+
+
+            d = temp % 10
+            temp //= 10
+
+
+            if(d > 0 and n % d == 0):
+                sum += d
+                product *= d
+
+        print("Sum =", sum)
+        print("Product =", product)
+
+
+    if __name__=='__main__':
+         n = 1012
+    
+    
+    
+    def lc_1389(self,nums, index):
+        
+        '''
+        Given two arrays of integers nums and index. Your task is to create target array under the following rules:
+
+        Initially target array is empty.
+        From left to right read nums[i] and index[i], insert at index index[i] the value nums[i] in target array.
+        Repeat the previous step until there are no elements to read in nums and index.
+        Return the target array.
+
+        It is guaranteed that the insertion operations will be valid.
+
+
+
+        Example 1:
+
+        Input: nums = [0,1,2,3,4], index = [0,1,2,2,1]
+        Output: [0,4,1,3,2]
+        Explanation:
+        nums       index     target
+        0            0        [0]
+        1            1        [0,1]
+        2            2        [0,1,2]
+        3            2        [0,1,3,2]
+        4            1        [0,4,1,3,2]
+        '''
+        
+        target = []
+        for i in range(len(nums)):
+            target.insert(index[i], nums[i])
+        return target
 
